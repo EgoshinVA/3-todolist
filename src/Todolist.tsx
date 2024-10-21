@@ -21,11 +21,15 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, compl
         }
     }
 
+    const keyPressHandler = (event: React.KeyboardEvent<HTMLElement>) => {
+        event.key === 'Enter' && onAddTaskCLickHandler()
+    }
+
     return (
         <div>
             <h3>{title}</h3>
             <div>
-                <input ref={inputRef} onKeyUp={event => event.key === 'Enter' && onAddTaskCLickHandler()}/>
+                <input ref={inputRef} onKeyPress={keyPressHandler}/>
                 <Button onClick={onAddTaskCLickHandler} title={'+'}/>
             </div>
             {
