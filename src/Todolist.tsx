@@ -8,9 +8,10 @@ type PropsType = {
     removeTask: (taskId: string) => void
     changeFilter: (filter: FilterValuesType) => void
     addTask: (title: string) => void
+    completeTask: (id: string) => void
 }
 
-export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: PropsType) => {
+export const Todolist = ({title, tasks, removeTask, changeFilter, addTask, completeTask}: PropsType) => {
     const inputRef = useRef<HTMLInputElement>(null)
 
     const onAddTaskCLickHandler = () => {
@@ -34,7 +35,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: Prop
                         {tasks.map(task => {
                             return (
                                 <li key={task.id}>
-                                    <input type="checkbox" checked={task.isDone}/>
+                                    <input onChange={()=>{completeTask(task.id)}} type="checkbox" checked={task.isDone}/>
                                     <span>{task.title}</span>
                                     <Button title={'x'} onClick={() => removeTask(task.id)}/>
                                 </li>
